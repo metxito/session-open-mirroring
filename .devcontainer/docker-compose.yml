@@ -1,0 +1,31 @@
+name: emfcc-openmirroring
+services:
+  emfcc-python:
+    image: mcr.microsoft.com/devcontainers/python:3.13
+    container_name: emfcc-python
+    volumes:
+      - ..:/workspaces/mastering-open-mirroring:cached
+      - ./docker_init:/docker_init
+    command: sleep infinity
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - openmirroring
+    ports:
+      - 9080:8000
+      - 9443:8443
+  emfcc-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: emfcc-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=EMFcc2025!
+      - MSSQL_AGENT_ENABLED=true
+    ports:
+      - 1433:1433
+    networks:
+      - openmirroring
+    restart: unless-stopped
+networks:
+  openmirroring:
+    driver: bridge

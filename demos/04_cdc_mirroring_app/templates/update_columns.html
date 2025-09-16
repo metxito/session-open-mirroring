@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Update columns configuration{% endblock %}
+{% block content %}
+<div class="mt-4 fs-6">
+<h2>Update Columns</h2>
+<form method="post">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Column Name</th>
+                <th>Type</th>
+                <th>Unique Key</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for col in columns %}
+            <tr>
+                <td>{{ col.id }}</td>
+                <td>{{ col.column }}</td>
+                <td>{{ col.data_type }}</td>
+                <td>
+                    <input type="checkbox" name="unique_key" value="{{ col.id }}" {% if col.unique_key %}checked{% endif %}>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/integration" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

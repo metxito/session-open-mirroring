@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Connection</th>
+            <th>Schema</th>
+            <th>Table</th>
+            <th>Unique Keys</th>
+            <th>CDC</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in sources %}
+        <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.connection_name }}</td>
+            <td>{{ row.schema }}</td>
+            <td>{{ row.table }}</td>
+            <td>{{ row.unique_keys }}</td>
+            <td>{{ 'CDC Enabled' if row.cdc_enabled else '' }}</td>
+            <td>
+                <form method="get" action="/update_columns/{{ row.id }}" style="display:inline;">
+                    <button type="submit" class="btn btn-primary btn-sm">Update Columns</button>
+                </form>
+                {% if row.cdc_enabled %}
+                    <form method="post" action="/include_source/{{ row.id }}" style="display:inline;">
+                        <button type="submit" class="btn btn-success btn-sm">Import as query</button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

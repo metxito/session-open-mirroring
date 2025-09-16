@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Integration{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <h2>Integration</h2>
+    <form method="post" action="/refresh_sources">
+        <button type="submit" class="btn btn-primary mb-3">Refresh metadata from source</button>
+    </form>
+    <div id="sourcesGrid">
+        {% include 'sources_table.html' %}
+    </div>
+</div>
+{% endblock %}

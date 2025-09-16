@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Current Status{% endblock %}
+{% block content %}
+<div class="mt-4 fs-6">
+    <h2>Current Status</h2>
+    <div class="d-flex mb-3">
+        <a class="btn btn-secondary" href="/integration">Import CDC table</a>
+    </div>
+
+    <!-- Grid for queries_control -->
+    <div id="queriesGrid">
+            <!-- Table will be rendered here by Jinja2 -->
+            {% include 'queries_table.html' %}
+    </div>
+</div>
+{% endblock %}

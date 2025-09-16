@@ -1,0 +1,10 @@
+{
+    "onelake_tenant_id": "",
+    "onelake_client_id": "",
+    "onelake_client_secret": "",
+    "onelake_landing_zone": "https://onelake.dfs.fabric.microsoft.com/xxxx/xxx/Files/LandingZone",
+
+    "database_control_url": "mssql+pyodbc://sa:EMFcc2025!@emfcc-sqlserver,1433/emfcc_control?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes",
+    "database_source_url":  "mssql+pyodbc://sa:EMFcc2025!@emfcc-sqlserver,1433/emfcc_source_cdc?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes"
+
+}

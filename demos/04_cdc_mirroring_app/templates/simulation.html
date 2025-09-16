@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Simulation{% endblock %}
+{% block content %}
+<!-- Simulation control button at page bottom -->
+<div class="mt-4" style="width: 100%; display: flex; flex-direction: row; align-items: flex-start;">
+
+    <div style="border: 1px solid rgba(150, 150, 150, .3); border-radius: 5px; padding:10px; margin:10px; width: 20%;">
+        <div id="divcontrol">
+            <h2>Transactional Simulation</h2>
+            <button id="simulation-btn" class="btn btn-info"></button>
+            <span id="simulation-status" class="ms-2"></span>
+            <div id="divlogs" class="mt-2"></div>
+        </div>
+        <script>
+            function updateSimulationButton(running) {
+            const btn = document.getElementById('simulation-btn');
+            btn.textContent = running ? 'Stop simulation' : 'Start simulation';
+            btn.className = running ? 'btn btn-danger' : 'btn btn-info';
+            btn.onclick = function() {
+                fetch(running ? '/stop_simulation' : '/start_simulation', {method: 'POST'})
+                .then(() => setTimeout(checkSimulationStatus, 300));
+            };
+            document.getElementById('simulation-status').textContent = running ? 'Simulation running...' : 'Simulation stopped.';
+            }
+
+            function addtimestamptlog(new_logs){
+                const logsDiv = document.getElementById('divlogs');
+                if (new_logs && Array.isArray(new_logs)) {
+                    new_logs.forEach(l => {
+                    const line = document.createElement('div');
+                    line.textContent = "Current timestamp : " + l;
+                    logsDiv.appendChild(line);
+                    });
+                }
+            }
+
+            function checkSimulationStatus() {
+            fetch('/simulation_status')
+                .then(r => r.json())
+                .then(data => {
+                updateSimulationButton(data.running);
+                if ('new_logs' in data) {
+                    if (data.new_logs.length > 0){
+                    addtimestamptlog(data.new_logs);
+                    }
+                }
+                });
+            }
+
+            // Initial button state
+            document.addEventListener('DOMContentLoaded', function() {
+            checkSimulationStatus();
+            setInterval(checkSimulationStatus, 3000);
+            });
+        </script>
+    </div>
+
+
+
+
+
+    <div class="col-7" style="border: 1px solid rgba(150, 150, 150, .3); border-radius: 5px; padding:10px; margin:10px; width: 60%;">
+        <div id="divcallloop">
+            <h2>Call Loop Simulation</h2>
+            <button id="callloop-btn" class="btn btn-info"></button>
+            <span id="callloop-status" class="ms-2"></span>
+            <table id="tableCallLogs" class="mt-2">
+                <tr>
+                    <th style="min-width: 70px;">Time</th>
+                    <th style="min-width: 70px;">Schema</th>
+                    <th style="min-width: 150px;">Table</th>
+                    <th style="min-width: 190px;">LSN</th>
+                    <th style="min-width: 600px;">Message</th></tr>
+
+            </table>
+        </div>
+        <script>
+            function updateCallLoopButton(running) {
+                const btn = document.getElementById('callloop-btn');
+                btn.textContent = running ? 'Stop call_loop' : 'Start call_loop';
+                btn.className = running ? 'btn btn-danger' : 'btn btn-info';
+                btn.onclick = function() {
+                    fetch(running ? '/stop_callloop' : '/start_callloop', {method: 'POST'})
+                    .then(() => setTimeout(checkCallLoopStatus, 300));
+                };
+                document.getElementById('callloop-status').textContent = running ? 'call_loop running...' : 'call_loop stopped.';
+            }
+
+            function addCallLoopLogs(new_logs){
+                console.log("asdasdasd")
+                const logsDiv = document.getElementById('tableCallLogs');
+                if (new_logs && Array.isArray(new_logs)) {
+                    new_logs.forEach(l => {
+                        // l should be an object or array with fields: time, schema, table, lsn, file
+                        // If l is a string, you may need to parse it
+                        let row = document.createElement('tr');
+                        // Example: if l is an object {time, schema, table, lsn, file}
+                        if (typeof l === 'object' && l !== null) {
+                            row.innerHTML = `<td>${l.time ?? ''}</td><td>${l.schema ?? ''}</td><td>${l.table ?? ''}</td><td>${l.lsn ?? ''}</td><td>${l.message ?? ''}</td>`;
+                        } else {
+                            // fallback: just print the string in one cell
+                            row.innerHTML = `<td colspan='5'>${l}</td>`;
+                        }
+                        logsDiv.appendChild(row);
+                    });
+                }
+            }
+
+            function checkCallLoopStatus() {
+            fetch('/callloop_status')
+                .then(r => r.json())
+                .then(data => {
+                    updateCallLoopButton(data.running);
+                    if ('new_logs' in data) {
+                        if (data.new_logs.length > 0){
+                            addCallLoopLogs(data.new_logs);
+                        }
+                    }
+                });
+            }
+
+            // Initial call_loop button state
+            document.addEventListener('DOMContentLoaded', function() {
+            checkCallLoopStatus();
+            setInterval(checkCallLoopStatus, 3000);
+            });
+        </script>
+    </div>
+</div>
+{% endblock %}

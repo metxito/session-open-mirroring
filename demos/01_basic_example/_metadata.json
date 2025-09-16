@@ -1,0 +1,22 @@
+{
+  "KeyColumns": ["zona", "id"],
+  "SchemaDefinition": {
+    "Columns": [
+       {"Name":"zona", "DataType":"String" },
+       {"Name":"id", "DataType":"Int32" },
+       {"Name":"name", "DataType":"String", "IsNullable":true },
+       {"Name":"email", "DataType":"String", "IsNullable":true }
+    ]
+  },
+  "FileFormat": "DelimitedText",
+  "FileExtension": "csv",
+  "FileFormatTypeProperties": {
+    "FirstRowAsHeader": true,
+    "RowSeparator": "\r\n",
+    "ColumnSeparator": ",",
+    "QuoteCharacter": "\"",
+    "EscapeCharacter": "\\",
+    "NullValue": "N/A",
+    "Encoding": "UTF-8"
+  }
+}

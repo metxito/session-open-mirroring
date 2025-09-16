@@ -1,0 +1,13 @@
+{
+    "tenant_id": "",
+    "client_name": "",
+    "client_id": "",
+    "client_secret": "",
+    "sql_server": "emfcc-sqlserver",
+    "sql_port": "1433",
+    "sql_user": "sa",
+    "sql_password": "EMFcc2025!",
+    "sql_catalog_source": "emfcc_source_basic",
+
+    "onelake_landing_zone": "https://onelake.dfs.fabric.microsoft.com/xxxx/xxx/Files/LandingZone"
+}

@@ -1,0 +1,12 @@
+# Python requirements for Open Mirroring PoC
+fastapi
+uvicorn
+jinja2
+pyodbc
+pandas
+python-multipart
+pyarrow
+sqlalchemy
+azure-identity
+azure-storage-file-datalake
+azure-storage-blob
