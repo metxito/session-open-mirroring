@@ -7,13 +7,10 @@ The goal of this project is to collect and organize all information, including p
 ## Table of Contents
 
 - [Overview](#overview)
-- [Slides](#slides)
-- [Code Examples](#code-examples)
-- [Main Topics](#main-topics)
 - [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
+- [Slides](#slides)
+- [DevContainers Quick Start](#DevContainers)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 - [References](#references)
 
@@ -33,7 +30,7 @@ The goal of this project is to collect and organize all information, including p
 The presentation slides for the session are included in this repository under the folder documentation.
 The file is: EMFCC25_MasteringOpenMirroring.v1.00.pdf
 
-## DevContainers Quick Start
+## DevContainers
 
 All demos have been prepared using DevContainers. By leveraging DevContainers, this repository provides a reliable, easy-to-use, and professional setup for hands-on labs, demos, and PoC work.
 

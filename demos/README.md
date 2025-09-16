@@ -26,8 +26,6 @@ Steps:
     python 03_detect_and_upload_changes.py
 ```
 
-
-
 ## 03_test_cdc
 
 Small .sql file you learn how to enable CDC
